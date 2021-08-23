@@ -1,4 +1,9 @@
 
+# APIs
+POST api/v1/domain-request
+
+GET api/v1/domain-request?period=<last_time_in_milis>
+
 Setup an run:
 
     Localy on django dev server:
@@ -11,5 +16,15 @@ Setup an run:
     
     Using docker:
         1. docker build . -t exercise
-        2. docker run --rm -d -p 80:8000 -v <input data folder relative path>:/home/app/web/data exercise python manage.py runserver 0.0.0.0:8000
+        2. docker run --rm -d -p 80:8000 exercise python manage.py runserver 0.0.0.0:8000
+  
+### Use server
+**add request**
+
+curl -X POST <host>api/v1/domain-request -H "Content-type: application/json" -d '{"timestamp": 1608102631, "A": 3, "B": 4}'
+    
+**get top 10 domains last minute**
+    
+curl -X GET <host>api/v1/domain-request?period=60000
+    
 
